@@ -1,0 +1,15 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:14.6-alpine
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+#  redis:
+#    image: redis:7.0.12
+#    ports:
+#      - "6379:6379"
