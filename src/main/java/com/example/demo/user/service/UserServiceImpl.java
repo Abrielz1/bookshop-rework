@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (StringUtils.hasText(updateUser.getEmail())) {
-            userFromDBtoUpdate.setUsername(updateUser.getEmail());
+            userFromDBtoUpdate.setEmail(updateUser.getEmail());
         }
 
         if (StringUtils.hasText(updateUser.getPassword())) {
