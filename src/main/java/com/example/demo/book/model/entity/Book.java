@@ -1,5 +1,6 @@
 package com.example.demo.book.model.entity;
 
+import com.example.demo.book.model.dto.BookDto;
 import com.example.demo.book.model.entity.links.Book2Author;
 import com.example.demo.book.model.entity.links.Book2Genre;
 import com.example.demo.user.model.entity.User;

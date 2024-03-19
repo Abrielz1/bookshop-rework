@@ -2,11 +2,13 @@ package com.example.demo.book.service;
 
 import com.example.demo.book.model.dto.GenreDto;
 import com.example.demo.book.model.dto.GenreNewDto;
+import org.springframework.data.domain.PageRequest;
+
 import java.util.List;
 
 public interface GenreService {
 
-    List<GenreDto> getGenreList();
+    List<GenreDto> getGenreList(PageRequest page);
 
     GenreDto getBooksById(Long genreId,
                           Long userId);

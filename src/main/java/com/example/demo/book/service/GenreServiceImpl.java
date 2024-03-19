@@ -5,6 +5,7 @@ import com.example.demo.book.model.dto.GenreNewDto;
 import com.example.demo.book.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -19,7 +20,7 @@ public class GenreServiceImpl implements GenreService {
 
     // todo: finAll
     @Override
-    public List<GenreDto> getGenreList() {
+    public List<GenreDto> getGenreList(PageRequest page) {
 
         return null;
     }

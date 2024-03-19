@@ -3,12 +3,13 @@ package com.example.demo.book.service;
 import com.example.demo.book.model.dto.AuthorNewDto;
 import com.example.demo.book.model.dto.BookDto;
 import com.example.demo.book.model.dto.BookNewDto;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
 public interface BookService {
 
-    List<BookDto> getBooksList();
+    List<BookDto> getBooksList(PageRequest page);
 
     BookDto getBooksById(Long bookId,
                          Long userId);

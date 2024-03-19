@@ -5,6 +5,7 @@ import com.example.demo.book.model.dto.BookNewDto;
 import com.example.demo.book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -19,7 +20,7 @@ public class BookServiceImpl implements BookService {
 
     // todo: finAll
     @Override
-    public List<BookDto> getBooksList() {
+    public List<BookDto> getBooksList(PageRequest page) {
 
         return null;
     }

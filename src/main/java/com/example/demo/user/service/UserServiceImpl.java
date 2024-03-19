@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-        @Override
+    @Override
     public List<UserShortDto> getAllUsersAccountsList(PageRequest page) {
 
-        log.info("\nAll user Accounts were sent via users service at time: " + LocalDateTime.now() +"\n");
+        log.info("\nAll user accounts list were sent via users service at time: " + LocalDateTime.now() + "\n");
         return userRepository.findAll(page)
                 .stream()
                 .map(UserMapper::toUserShortDto)
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     public UserShortDto getUserAccountById(Long userId) {
 
         log.info("\nUser Account was sent with id: %d via users service at time: ".formatted(userId)
-                + LocalDateTime.now() +"\n");
+                + LocalDateTime.now() + "\n");
         return toUserShortDto(checkUserInDataBase(userId));
     }
 
@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
         User user = checkUserInDataBase(userId);
 
         userRepository.findById(userId).ifPresent(userRepository::delete);
+
         log.info("\nUser account with id: %d was deleted via users service at time: ".formatted(userId)
                 + LocalDateTime.now() + "\n");
 
@@ -98,7 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private User checkUserInDataBase(Long userId) {
-       return userRepository.findById(userId).orElseThrow(() -> {
+        return userRepository.findById(userId).orElseThrow(() -> {
 
             log.error("No such element with id: %d!\n".formatted(userId));
             return new ObjectNotFoundException("User Account was not found!");
