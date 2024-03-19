@@ -23,5 +23,8 @@ public class UserNewDto {
     @NotBlank
     private String password;
 
+    @NotBlank
+    private String displayName;
+
     // todo: ещё роль в виде енума
 }

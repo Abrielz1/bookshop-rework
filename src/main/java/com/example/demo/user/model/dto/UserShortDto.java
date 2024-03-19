@@ -11,7 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserShortDto {
 
-    private String username;
+    private String displayName;
 
     private String email;
 }
+
+
+
+//  private LocalDateTime createdAt;
+
+//  private LocalDateTime updatedAt;

@@ -71,6 +71,12 @@ public class UserServiceImpl implements UserService {
             userFromDBtoUpdate.setPassword(updateUser.getPassword());
         }
 
+        if (StringUtils.hasText(updateUser.getDisplayName())) {
+            userFromDBtoUpdate.setDisplayName(updateUser.getDisplayName());
+        }
+
+        userFromDBtoUpdate.setUpdateTime(System.currentTimeMillis());
+
         log.info("\nUser account with id: %d was updated via users service at time: ".formatted(userId)
                 + LocalDateTime.now() + "\n");
 
@@ -95,7 +101,6 @@ public class UserServiceImpl implements UserService {
        return userRepository.findById(userId).orElseThrow(() -> {
 
             log.error("No such element with id: %d!\n".formatted(userId));
-            System.out.println("at time: " + LocalDateTime.now());
             return new ObjectNotFoundException("User Account was not found!");
         });
     }
