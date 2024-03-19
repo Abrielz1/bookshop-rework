@@ -7,6 +7,7 @@ import com.example.demo.user.model.dto.UserShortDto;
 import com.example.demo.user.model.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import com.example.demo.user.service.UserServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static com.example.demo.user.mapper.UserMapper.*;
@@ -71,22 +74,60 @@ class UserControllerTest {
     }
 
     @Test
-    void sendAllUsersAccountsList() {
+    void sendAllUsersAccountsList() throws Exception {
+
+        when(userService.getAllUsersAccountsList(PageRequest.ofSize(10)))
+                .thenReturn(List.of(userShortDto));
+
+        mockMvc.perform(get("/users"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(mapper.writeValueAsString(List.of(userShortDto))));
     }
 
     @Test
-    void sendUserAccountById() {
+    void sendUserAccountById() throws Exception {
+
+        when(userService.getUserAccountById(anyLong()))
+                .thenReturn(userShortDto);
+
+        mockMvc.perform(get("/users/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(mapper.writeValueAsString(userShortDto)));
     }
 
     @Test
-    void registerUserAccount() {
+    void registerUserAccount() throws Exception {
+
+        when(userService.registerUserAccount(any(UserNewDto.class)))
+                .thenReturn(userShortDto);
+
+        mockMvc.perform(post("/users")
+                        .content(mapper.writeValueAsString(userShortDto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(content().json(mapper.writeValueAsString(userShortDto)));
     }
 
     @Test
-    void updateUserAccount() {
+    void updateUserAccount() throws Exception {
+
+        when(userService.updateUserAccount(anyLong(), any(UserNewDto.class)))
+                .thenReturn(userShortDto);
+
+        mockMvc.perform(put("/users/1")
+                        .content(mapper.writeValueAsString(userShortDto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(mapper.writeValueAsString(userShortDto)));
     }
 
     @Test
-    void deleteUserAccount() {
+    void deleteUserAccount() throws Exception {
+
+        when(userService.removeUserAccountById(anyLong()))
+                .thenReturn(userShortDto);
+
+        mockMvc.perform(delete("/users/1"))
+                .andExpect(status().isNoContent());
     }
 }
