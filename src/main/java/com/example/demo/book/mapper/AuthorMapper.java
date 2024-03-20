@@ -23,6 +23,7 @@ public class AuthorMapper {
                 .patronym(author.getPatronym())
                 .lastName(author.getLastName())
                 .biography(author.getBiography())
+                .creatorId(author.getUser().getId())
                 .build();
     }
 }

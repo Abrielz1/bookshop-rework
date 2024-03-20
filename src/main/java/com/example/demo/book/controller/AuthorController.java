@@ -22,14 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/author")
+@RequestMapping("/authors")
 @RequiredArgsConstructor
 public class AuthorController {
 
@@ -48,8 +47,8 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AuthorDto  sendUserAccountById(@Positive @PathVariable(name = "id") Long authorId,
-                                          @Positive @RequestParam() Long userId) {
+    public AuthorDto sendAuthorById(@Positive @PathVariable(name = "id") Long authorId,
+                                         @Positive @RequestParam() Long userId) {
 
         log.info(("\nAuthor with id: %d" +
                 " was sent via authors controller" +
